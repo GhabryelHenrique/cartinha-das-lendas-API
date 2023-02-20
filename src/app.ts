@@ -1,9 +1,9 @@
 import express from "express";
 import mongoose from "mongoose";
-import { ratingPlayersRouter } from "./routes/ratingPlayers.routes";
+import { ratingPlayersRouter } from "./app/routes/ratingPlayers.routes";
 import dotenv from "dotenv";
-import { authRouter } from "./routes/auth.routes";
-import { start } from "./utils/refreshRatings.utils";
+import { authRouter } from "./app/routes/auth.routes";
+import { start } from "./app/utils/refreshRatings.utils";
 dotenv.config();
 
 export class App{

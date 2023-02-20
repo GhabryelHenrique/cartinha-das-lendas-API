@@ -1,11 +1,10 @@
-import { NextFunction, Request, Response } from "express";
-import mongoose from "mongoose";
-import playersModels from "../models/players.models";
-import usersModels from "../models/users.model";
-import superAdminModels from "../models/superAdmin.models";
 import bcrypt from "bcrypt";
-import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
+import { Request, Response } from "express";
+import jwt from "jsonwebtoken";
+import mongoose from "mongoose";
+import superAdminModels from "../models/superAdmin.models";
+import usersModels from "../models/users.model";
 import { generateTokens } from "../utils/autenticateToken.utils";
 
 dotenv.config();
@@ -91,7 +90,6 @@ export const login = async (req: Request, res: Response) => {
     const user = await usersModels.findOne({email: email})
 
     if(!user) return res.status(400).json({ message: "Usuário não existe" });
-
     
     const isPasswordCorrect = await bcrypt.compare(password, user.password);
     

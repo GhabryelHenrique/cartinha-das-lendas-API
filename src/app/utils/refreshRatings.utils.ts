@@ -3,11 +3,11 @@ import teamModels from "../models/team.models";
 
 async function refreshChatRatings() {
   const players = await playersModels.find();
-  const playersWithRatings: any = players.map((player) => {
-    const playersRatings = player.chatRatings.map((rate) => rate.rating);
+  const playersWithRatings: any = players.map((player: any) => {
+    const playersRatings = player.chatRatings.map((rate: any) => rate.rating);
     const averageRating =
       playersRatings.reduce(
-        (accumulator, currentValue) => accumulator + currentValue
+        (accumulator: any, currentValue: any) => accumulator + currentValue
       ) / playersRatings.length;
     return {
       ...player,
@@ -22,12 +22,12 @@ async function refreshTeamsRatings() {
   const players = await playersModels.find();
   const teams = await teamModels.find();
 
-  teams.forEach(async (team) => {
-    const playersToSameTeam = players.filter(player => player.team === team.name)
+  teams.forEach(async (team: any) => {
+    const playersToSameTeam = players.filter((player: any) => player.team === team.name)
 
-    const playersRatings = playersToSameTeam.map(player => player.rating)
+    const playersRatings = playersToSameTeam.map((player: any) => player.rating)
 
-    const averageRating = playersRatings.reduce((accumulator, currentValue) => accumulator + currentValue) / playersRatings.length
+    const averageRating = playersRatings.reduce((accumulator: any, currentValue: any) => accumulator + currentValue) / playersRatings.length
 
     await teamModels.updateOne({name: team.name}, {rating: averageRating})
   })
